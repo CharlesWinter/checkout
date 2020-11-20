@@ -1,4 +1,4 @@
-package checkout
+package checkout_test
 
 import (
 	"testing"
@@ -14,8 +14,10 @@ func TestScan(t *testing.T) {
 
 		c.Scan(itemToAdd)
 
-		if items := c.ListBasketItems(); len(items) != 1 || items[0] != itemToAdd {
-			t.Fatalf("expected item %s in basket, got items: %v", itemToAdd, items)
+		items := c.ListBasketItems()
+
+		if quantity, ok := items[itemToAdd]; !ok || quantity != 1 {
+			t.Fatalf("unexpected basket: %#v", items)
 		}
 	})
 }
