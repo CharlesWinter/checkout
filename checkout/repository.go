@@ -2,16 +2,20 @@ package checkout
 
 // Repository defines a type capable of affording basic checkout capability
 type Repository struct {
+	priceChecker PriceChecker
+
 	basket map[string]uint
 }
 
 // RepositoryConfig is the config struct for the repostitory
 type RepositoryConfig struct {
+	PriceChecker PriceChecker
 }
 
 // New returns a new Repository
 func New(cfg RepositoryConfig) *Repository {
 	return &Repository{
-		basket: make(map[string]uint),
+		priceChecker: cfg.PriceChecker,
+		basket:       make(map[string]uint),
 	}
 }
