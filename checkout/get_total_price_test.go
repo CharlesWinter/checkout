@@ -42,5 +42,43 @@ func TestGetTotalPrice(t *testing.T) {
 	})
 
 	t.Run("returns the total price correctly for a basket with a deal", func(t *testing.T) {
+		var dealPrice uint = 43
+
+		ctrl := gomock.NewController(t)
+
+		deals := []entities.Deal{
+			{
+				RequiredSubbasket: entities.Basket{
+					itemNameA: 1,
+					itemNameB: 2,
+					itemNameC: 3,
+				},
+				Price: dealPrice,
+			},
+		}
+
+		mockDealGetter := NewMockDealGetter(ctrl)
+		mockDealGetter.EXPECT().GetDeals().Return(deals)
+
+		mockPriceChecker := NewMockPriceChecker(ctrl)
+
+		repo := checkout.New(checkout.RepositoryConfig{
+			DealGetter:   mockDealGetter,
+			PriceChecker: mockPriceChecker,
+		})
+
+		repo.Scan(itemNameA)
+
+		repo.Scan(itemNameB)
+		repo.Scan(itemNameB)
+
+		repo.Scan(itemNameC)
+		repo.Scan(itemNameC)
+		repo.Scan(itemNameC)
+
+		got := repo.GetTotalPrice()
+		if got != dealPrice {
+			t.Fatalf("wanted price %d, got %d", dealPrice, got)
+		}
 	})
 }
