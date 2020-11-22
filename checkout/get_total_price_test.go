@@ -27,8 +27,12 @@ func TestGetTotalPrice(t *testing.T) {
 		mockPriceChecker.EXPECT().GetItemPrice(itemNameB).Return(itemPriceB)
 		mockPriceChecker.EXPECT().GetItemPrice(itemNameC).Return(itemPriceC)
 
+		mockDealGetter := NewMockDealGetter(ctrl)
+		mockDealGetter.EXPECT().GetDeals().Return(nil)
+
 		c := checkout.New(checkout.RepositoryConfig{
 			PriceChecker: mockPriceChecker,
+			DealGetter:   mockDealGetter,
 		})
 
 		c.Scan(itemNameA)
