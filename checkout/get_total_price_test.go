@@ -40,4 +40,7 @@ func TestGetTotalPrice(t *testing.T) {
 			t.Fatalf("got %d want %d", got, want)
 		}
 	})
+
+	t.Run("returns the total price correctly for a basket with a deal", func(t *testing.T) {
+	})
 }
