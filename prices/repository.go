@@ -6,9 +6,10 @@ import "github.com/CharlesWinter/checkout/entities"
 // prices to the checkout. Its purpose is to facilitate the later removal of the
 // prices functionality to somewhere else, if required.
 type Repository struct {
+	Prices map[entities.ItemName]uint
 }
 
 // GetItemPrice returns the deals from the repository
 func (r Repository) GetItemPrice(name entities.ItemName) uint {
-	return 0
+	return r.Prices[name]
 }
