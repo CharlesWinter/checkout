@@ -4,7 +4,7 @@ package checkout
 func (r Repository) GetTotalPrice() uint {
 	var totalPrice uint
 	for name, quantity := range r.basket {
-		totalPrice += quantity * r.priceChecker.GetItemPrice(name)
+		totalPrice += uint(quantity) * r.priceChecker.GetItemPrice(name)
 	}
 	return totalPrice
 }

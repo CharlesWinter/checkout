@@ -4,17 +4,18 @@ import (
 	"testing"
 
 	"github.com/CharlesWinter/checkout/checkout"
+	"github.com/CharlesWinter/checkout/entities"
 )
 
 // TestListItems is a test for the List Items method receiver on the checkout struct
 func TestListItems(t *testing.T) {
 	t.Run("calling get items returns a count of all items", func(t *testing.T) {
 		var (
-			itemA = "itemA"
-			itemB = "itemB"
+			itemA entities.ItemName = "itemA"
+			itemB entities.ItemName = "itemB"
 
-			expectedQuantityItemA uint = 2
-			expectedQuantityItemB uint = 1
+			expectedQuantityItemA entities.ItemQuantity = 2
+			expectedQuantityItemB entities.ItemQuantity = 1
 		)
 
 		c := checkout.New(checkout.RepositoryConfig{})

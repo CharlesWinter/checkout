@@ -1,5 +1,7 @@
 package checkout
 
-func (r *Repository) ListBasketItems() map[string]uint {
+import "github.com/CharlesWinter/checkout/entities"
+
+func (r *Repository) ListBasketItems() entities.Basket {
 	return r.basket
 }

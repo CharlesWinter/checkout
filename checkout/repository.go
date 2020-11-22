@@ -1,10 +1,12 @@
 package checkout
 
+import "github.com/CharlesWinter/checkout/entities"
+
 // Repository defines a type capable of affording basic checkout capability
 type Repository struct {
 	priceChecker PriceChecker
 
-	basket map[string]uint
+	basket entities.Basket
 }
 
 // RepositoryConfig is the config struct for the repostitory
@@ -16,6 +18,6 @@ type RepositoryConfig struct {
 func New(cfg RepositoryConfig) *Repository {
 	return &Repository{
 		priceChecker: cfg.PriceChecker,
-		basket:       make(map[string]uint),
+		basket:       make(entities.Basket),
 	}
 }

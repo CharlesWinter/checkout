@@ -4,13 +4,14 @@ import (
 	"testing"
 
 	"github.com/CharlesWinter/checkout/checkout"
+	"github.com/CharlesWinter/checkout/entities"
 	gomock "github.com/golang/mock/gomock"
 )
 
 const (
-	itemNameA = "A"
-	itemNameB = "B"
-	itemNameC = "C"
+	itemNameA entities.ItemName = "A"
+	itemNameB entities.ItemName = "B"
+	itemNameC entities.ItemName = "C"
 
 	itemPriceA uint = 50
 	itemPriceB uint = 30
